@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Govind Sharma – AI & ML Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --white: #ffffff; --off: #f7f8fa; --soft: #eef0f4; --border: #e2e5ec;
+    --muted: #8b92a5; --body: #3d4455; --heading: #0f1120;
+    --accent: #2563eb; --accent2: #7c3aed; --accent-soft: #eff4ff;
+    --gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    --font-display: 'Syne', sans-serif; --font-body: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--white); color: var(--body); line-height: 1.6; overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 5%; background: rgba(255,255,255,0.88); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; }
+  .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+  .nav-links a { font-size: 0.87rem; font-weight: 500; color: var(--body); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta { font-size: 0.85rem; font-weight: 600; padding: 0.5rem 1.2rem; background: var(--gradient); color: #fff; border-radius: 8px; text-decoration: none; transition: opacity 0.2s; }
+  .nav-cta:hover { opacity: 0.88; }
+
+  /* HERO */
+  #hero { min-height: 100vh; display: flex; align-items: center; padding: 7rem 5% 4rem; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 65% 55% at 85% 50%, #eff4ff 0%, transparent 70%), radial-gradient(ellipse 45% 60% at 5% 80%, #f3eeff 0%, transparent 60%); }
+  .hero-content { position: relative; z-index: 1; max-width: 740px; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.76rem; font-weight: 500; color: var(--accent); background: var(--accent-soft); border: 1px solid #bfdbfe; border-radius: 100px; padding: 0.32rem 0.9rem; margin-bottom: 1.4rem; }
+  .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: block; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.4)} }
+  .hero-name { font-family: var(--font-display); font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 800; line-height: 1.04; color: var(--heading); letter-spacing: -2px; margin-bottom: 0.4rem; }
+  .hero-name span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero-title { font-family: var(--font-display); font-size: clamp(1.1rem, 2.5vw, 1.55rem); font-weight: 600; color: var(--muted); margin-bottom: 1.4rem; letter-spacing: -0.3px; }
+  .hero-bio { font-size: 1rem; color: var(--body); max-width: 600px; line-height: 1.8; margin-bottom: 2rem; }
+  .hero-stats { display: flex; gap: 2.5rem; margin-bottom: 2.2rem; flex-wrap: wrap; }
+  .stat .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 800; line-height: 1; }
+  .stat .stat-num span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .stat .stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; }
+  .hero-cta { display: flex; gap: 0.9rem; flex-wrap: wrap; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.85rem 1.8rem; background: var(--gradient); color: #fff; font-weight: 600; font-size: 0.93rem; border: none; border-radius: 10px; cursor: pointer; text-decoration: none; box-shadow: 0 4px 20px rgba(37,99,235,0.28); transition: transform 0.2s, box-shadow 0.2s; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,99,235,0.38); }
+  .btn-outline { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.85rem 1.8rem; background: transparent; color: var(--heading); font-weight: 600; font-size: 0.93rem; border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* SECTIONS */
+  section { padding: 5.5rem 5%; }
+  section:nth-child(even) { background: var(--off); }
+  .section-label { font-family: var(--font-mono); font-size: 0.73rem; font-weight: 500; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+  .section-title { font-family: var(--font-display); font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 800; color: var(--heading); letter-spacing: -1px; line-height: 1.1; margin-bottom: 0.8rem; }
+  .section-sub { font-size: 0.97rem; color: var(--muted); max-width: 520px; }
+
+  /* ABOUT */
+  #about .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+  .about-text p { margin-bottom: 1.1rem; line-height: 1.8; font-size: 0.97rem; }
+  .about-highlights { display: flex; flex-direction: column; gap: 0.9rem; }
+  .highlight-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.2rem 1.4rem; display: flex; align-items: flex-start; gap: 1rem; transition: border-color 0.2s, box-shadow 0.2s; }
+  .highlight-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(37,99,235,0.07); }
+  .highlight-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+  .highlight-text h4 { font-weight: 600; color: var(--heading); font-size: 0.92rem; }
+  .highlight-text p { font-size: 0.82rem; color: var(--muted); margin-top: 0.15rem; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.3rem; margin-top: 2.5rem; }
+  .skill-category { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 1.6rem; transition: box-shadow 0.2s, border-color 0.2s; }
+  .skill-category:hover { box-shadow: 0 8px 32px rgba(15,17,32,0.07); border-color: var(--accent); }
+  .category-head { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.1rem; }
+  .category-icon { width: 34px; height: 34px; border-radius: 8px; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+  .category-name { font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; color: var(--heading); }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .skill-tag { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; padding: 0.28rem 0.7rem; border-radius: 6px; background: var(--soft); color: var(--body); border: 1px solid var(--border); transition: background 0.2s, color 0.2s; cursor: default; }
+  .skill-tag:hover { background: var(--accent-soft); color: var(--accent); border-color: #bfdbfe; }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.3rem; margin-top: 2.5rem; }
+  .project-card { background: var(--white); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; transition: transform 0.22s, box-shadow 0.22s; }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(15,17,32,0.09); }
+  .project-top { padding: 1.6rem 1.6rem 0; display: flex; justify-content: space-between; align-items: flex-start; }
+  .project-badge { font-family: var(--font-mono); font-size: 0.68rem; font-weight: 500; padding: 0.22rem 0.6rem; border-radius: 100px; background: var(--accent-soft); color: var(--accent); border: 1px solid #bfdbfe; }
+  .project-body { padding: 1rem 1.6rem 1.6rem; }
+  .project-name { font-family: var(--font-display); font-weight: 700; font-size: 1.08rem; color: var(--heading); margin-bottom: 0.45rem; letter-spacing: -0.3px; }
+  .project-desc { font-size: 0.87rem; color: var(--muted); line-height: 1.7; margin-bottom: 0.9rem; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.38rem; }
+  .stack-tag { font-family: var(--font-mono); font-size: 0.68rem; padding: 0.2rem 0.55rem; border-radius: 5px; background: var(--soft); color: var(--body); border: 1px solid var(--border); }
+
+  /* CERTIFICATIONS */
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.1rem; margin-top: 2.5rem; }
+  .cert-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.4rem; display: flex; gap: 1rem; align-items: flex-start; transition: border-color 0.2s, box-shadow 0.2s; }
+  .cert-card:hover { border-color: var(--accent2); box-shadow: 0 4px 20px rgba(124,58,237,0.08); }
+  .cert-icon { width: 38px; height: 38px; border-radius: 9px; background: linear-gradient(135deg,#7c3aed,#a855f7); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+  .cert-info h4 { font-weight: 600; font-size: 0.88rem; color: var(--heading); line-height: 1.3; margin-bottom: 0.25rem; }
+  .cert-info p { font-size: 0.76rem; color: var(--muted); }
+  .cert-year { display: inline-block; margin-top: 0.4rem; font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent2); background: #f5f3ff; border: 1px solid #ddd6fe; border-radius: 5px; padding: 0.15rem 0.5rem; }
+
+  /* HACKATHON */
+  .hackathon-card { background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 2rem; margin-top: 2.5rem; display: flex; gap: 2rem; align-items: flex-start; transition: border-color 0.2s, box-shadow 0.2s; }
+  .hackathon-card:hover { border-color: var(--accent); box-shadow: 0 8px 32px rgba(37,99,235,0.08); }
+  .hack-badge { background: var(--gradient); color: #fff; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; padding: 0.9rem 1.3rem; border-radius: 12px; white-space: nowrap; text-align: center; line-height: 1.3; }
+  .hack-info h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; color: var(--heading); margin-bottom: 0.4rem; }
+  .hack-info .hack-org { font-size: 0.85rem; color: var(--accent); font-weight: 600; margin-bottom: 0.6rem; }
+  .hack-info p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+
+  /* EDUCATION */
+  .edu-timeline { display: flex; flex-direction: column; gap: 1.2rem; max-width: 740px; margin-top: 2.5rem; }
+  .edu-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 1.6rem; display: grid; grid-template-columns: auto 1fr; gap: 1.4rem; align-items: start; transition: border-color 0.2s, box-shadow 0.2s; }
+  .edu-card:hover { border-color: var(--accent); box-shadow: 0 4px 24px rgba(37,99,235,0.07); }
+  .edu-year { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; color: var(--accent); background: var(--accent-soft); border: 1px solid #bfdbfe; border-radius: 8px; padding: 0.35rem 0.75rem; white-space: nowrap; text-align: center; }
+  .edu-info h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--heading); margin-bottom: 0.25rem; }
+  .edu-info .institute { font-size: 0.87rem; color: var(--body); margin-bottom: 0.4rem; }
+  .edu-gpa { display: inline-flex; align-items: center; gap: 0.35rem; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; color: var(--accent2); background: #f5f3ff; border: 1px solid #ddd6fe; border-radius: 100px; padding: 0.18rem 0.65rem; }
+
+  /* ROADMAP */
+  #roadmap { background: var(--off); }
+  .roadmap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin-top: 2.5rem; }
+  .roadmap-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; transition: border-color 0.2s, box-shadow 0.2s; }
+  .roadmap-card:hover { border-color: var(--accent2); box-shadow: 0 4px 20px rgba(124,58,237,0.07); }
+  .roadmap-phase { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; color: var(--accent2); background: #f5f3ff; border: 1px solid #ddd6fe; border-radius: 100px; padding: 0.2rem 0.65rem; display: inline-block; margin-bottom: 0.7rem; }
+  .roadmap-card h4 { font-family: var(--font-display); font-weight: 700; font-size: 0.97rem; color: var(--heading); margin-bottom: 0.5rem; }
+  .roadmap-items { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+  .roadmap-items li { font-size: 0.82rem; color: var(--muted); padding-left: 1rem; position: relative; }
+  .roadmap-items li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; top: 0.05rem; }
+
+  /* CONTACT */
+  #contact .contact-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+  .contact-inner .section-label, .contact-inner .section-sub { display: block; margin: 0 auto; }
+  .contact-inner .section-title { margin: 0 auto 0.8rem; }
+  .contact-inner .section-sub { margin-bottom: 2.2rem; }
+  .contact-cards { display: flex; gap: 0.9rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+  .contact-card { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.2rem 1.6rem; text-decoration: none; transition: border-color 0.2s, box-shadow 0.2s; min-width: 130px; }
+  .contact-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(37,99,235,0.09); }
+  .contact-card-icon { font-size: 1.35rem; }
+  .contact-card-label { font-size: 0.78rem; font-weight: 600; color: var(--heading); }
+  .contact-card-val { font-size: 0.72rem; color: var(--muted); }
+
+  /* FOOTER */
+  footer { padding: 1.8rem 5%; text-align: center; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); }
+  footer span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600; }
+
+  /* ANIMATIONS */
+  .fade-in { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  @media(max-width:768px){
+    .nav-links { display: none; }
+    #about .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .edu-card { grid-template-columns: 1fr; }
+    .hackathon-card { flex-direction: column; gap: 1rem; }
+    .hero-stats { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Govind</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Open to Internships & Collaborations</div>
+    <h1 class="hero-name">Govind <span>Sharma</span></h1>
+    <p class="hero-title">AI & ML Engineer · B.Tech CSE (AI & ML)</p>
+    <p class="hero-bio">
+      Highly motivated AI & ML student at The ICFAI University, Jaipur with a 9.34 CGPA (9.42 in Sem 1, 9.26 in Sem 2). Building intelligent, scalable applications using Python, Machine Learning, and Generative AI. Final-round participant at NIT Agartala's Technothon Aayam 2026 and founder of AASRA Web Developer.
+    </p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num"><span>9.34</span></div><div class="stat-label">CGPA / 10</div></div>
+      <div class="stat"><div class="stat-num"><span>NIT</span></div><div class="stat-label">Hackathon Finalist</div></div>
+    </div>
+
+    <!-- CGPA Button -->
+    <div style="margin-bottom:2rem;">
+      <button onclick="toggleCGPA()" id="cgpa-btn" style="display:inline-flex;align-items:center;gap:0.5rem;font-family:'JetBrains Mono',monospace;font-size:0.82rem;font-weight:500;padding:0.6rem 1.2rem;background:var(--white);border:1.5px solid var(--border);border-radius:10px;cursor:pointer;color:var(--heading);transition:all 0.2s;">
+        📊 View CGPA Breakdown <span id="cgpa-arrow" style="transition:transform 0.3s;display:inline-block;">▼</span>
+      </button>
+      <div id="cgpa-panel" style="display:none;margin-top:0.8rem;background:var(--white);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;max-width:340px;box-shadow:0 8px 32px rgba(15,17,32,0.08);">
+        <div style="padding:0.7rem 1.2rem;background:var(--gradient);font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;color:#fff;letter-spacing:0.03em;">B.Tech CSE (AI & ML) · ICFAI Jaipur</div>
+        <div style="padding:0.5rem 0;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:0.7rem 1.2rem;border-bottom:1px solid var(--border);">
+            <span style="font-size:0.85rem;color:var(--body);font-weight:500;">Semester 1</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.95rem;font-weight:600;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">9.42</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:0.7rem 1.2rem;border-bottom:1px solid var(--border);">
+            <span style="font-size:0.85rem;color:var(--body);font-weight:500;">Semester 2</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.95rem;font-weight:600;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">9.26</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:0.7rem 1.2rem;background:var(--accent-soft);">
+            <span style="font-size:0.85rem;color:var(--accent);font-weight:700;">Overall CGPA</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">9.34 / 10</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">🚀 View My Work</a>
+      <a href="mailto:govind.official727@gmail.com" class="btn-outline">📩 Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid fade-in">
+    <div class="about-text">
+      <div class="section-label">// about me</div>
+      <h2 class="section-title">Building AI that<br/>actually works</h2>
+      <p>I'm a B.Tech CSE (AI & ML) student at The ICFAI University, Jaipur, driven by a passion for building intelligent systems. With a 9.6 CGPA, I combine strong academic foundations with real-world execution.</p>
+      <p>Beyond academics, I founded <strong>AASRA Web Developer</strong> — delivering modern, responsive websites for real clients — and competed at the national level in Technothon Aayam 2026 at NIT Agartala.</p>
+      <p>I'm currently following a structured 9–14 month AI/ML engineering roadmap, targeting production-level roles in artificial intelligence.</p>
+    </div>
+    <div class="about-highlights">
+      <div class="highlight-card">
+        <div class="highlight-icon">🤖</div>
+        <div class="highlight-text"><h4>Machine Learning</h4><p>Classical ML, deep learning, and model deployment pipelines</p></div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">✨</div>
+        <div class="highlight-text"><h4>Generative AI</h4><p>LLMs, prompt engineering, and GenAI applications</p></div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">☁️</div>
+        <div class="highlight-text"><h4>Cloud AI</h4><p>AWS ML and Google Cloud AI certified practitioner</p></div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">🌐</div>
+        <div class="highlight-text"><h4>Web & Entrepreneurship</h4><p>Founder of AASRA Web Developer — real clients, real solutions</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="fade-in">
+    <div class="section-label">// tech stack</div>
+    <h2 class="section-title">Skills & Tools</h2>
+    <p class="section-sub">Everything I use to build, train, and ship intelligent systems.</p>
+  </div>
+  <div class="skills-grid fade-in">
+    <div class="skill-category">
+      <div class="category-head"><div class="category-icon">🐍</div><span class="category-name">Languages</span></div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span><span class="skill-tag">C Language</span><span class="skill-tag">HTML</span><span class="skill-tag">CSS</span><span class="skill-tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="category-head"><div class="category-icon">🧠</div><span class="category-name">AI / ML</span></div>
+      <div class="skill-tags">
+        <span class="skill-tag">Machine Learning</span><span class="skill-tag">Generative AI</span><span class="skill-tag">Data Analysis</span><span class="skill-tag">NumPy</span><span class="skill-tag">Pandas</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="category-head"><div class="category-icon">☁️</div><span class="category-name">Cloud & Platforms</span></div>
+      <div class="skill-tags">
+        <span class="skill-tag">AWS Educate</span><span class="skill-tag">Google Cloud AI</span><span class="skill-tag">Hostinger</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="category-head"><div class="category-icon">💻</div><span class="category-name">Core CS</span></div>
+      <div class="skill-tags">
+        <span class="skill-tag">DSA</span><span class="skill-tag">OOP</span><span class="skill-tag">DBMS</span><span class="skill-tag">Operating Systems</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="category-head"><div class="category-icon">🛠️</div><span class="category-name">Tools</span></div>
+      <div class="skill-tags">
+        <span class="skill-tag">Git</span><span class="skill-tag">GitHub</span><span class="skill-tag">VS Code</span><span class="skill-tag">Linux</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="category-head"><div class="category-icon">🤝</div><span class="category-name">Soft Skills</span></div>
+      <div class="skill-tags">
+        <span class="skill-tag">Problem Solving</span><span class="skill-tag">Leadership</span><span class="skill-tag">Teamwork</span><span class="skill-tag">Communication</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="fade-in">
+    <div class="section-label">// my work</div>
+    <h2 class="section-title">Projects</h2>
+    <p class="section-sub">Real AI/ML and web projects I've built and shipped.</p>
+  </div>
+  <div class="projects-grid fade-in">
+    <div class="project-card">
+      <div class="project-top"><span class="project-badge">Generative AI</span></div>
+      <div class="project-body">
+        <h3 class="project-name">AI Solar Energy Prototype</h3>
+        <p class="project-desc">Designed and prototyped an AI-assisted solar energy solution at Technothon Aayam 2026 (NIT Agartala). Reached the national final round representing ICFAI University Jaipur as Team GreyScale.</p>
+        <div class="project-stack"><span class="stack-tag">Python</span><span class="stack-tag">AI/ML</span><span class="stack-tag">Prototyping</span></div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-top"><span class="project-badge">Web Dev</span></div>
+      <div class="project-body">
+        <h3 class="project-name">AASRA Web Developer</h3>
+        <p class="project-desc">Founded an independent web development venture building modern, responsive websites for small businesses. Managed end-to-end client communication, development, and deployment via Hostinger.</p>
+        <div class="project-stack"><span class="stack-tag">HTML</span><span class="stack-tag">CSS</span><span class="stack-tag">JavaScript</span><span class="stack-tag">Hostinger</span></div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-top"><span class="project-badge">Data Analysis</span></div>
+      <div class="project-body">
+        <h3 class="project-name">ML Data Analysis Projects</h3>
+        <p class="project-desc">Built multiple data analysis and machine learning projects applying NumPy, Pandas, and scikit-learn on real datasets — covering EDA, feature engineering, and model evaluation.</p>
+        <div class="project-stack"><span class="stack-tag">Python</span><span class="stack-tag">Pandas</span><span class="stack-tag">NumPy</span><span class="stack-tag">scikit-learn</span></div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-top"><span class="project-badge">Cloud AI</span></div>
+      <div class="project-body">
+        <h3 class="project-name">Cloud AI Integrations</h3>
+        <p class="project-desc">Explored and implemented AI services on AWS and Google Cloud — including ML Foundation labs on AWS Educate and Google Cloud AI tools via Simplilearn SkillUp.</p>
+        <div class="project-stack"><span class="stack-tag">AWS ML</span><span class="stack-tag">Google Cloud AI</span><span class="stack-tag">Python</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="fade-in">
+    <div class="section-label">// credentials</div>
+    <h2 class="section-title">Certifications</h2>
+    <p class="section-sub">Industry-recognised certifications from AWS, Google, and more.</p>
+  </div>
+  <div class="certs-grid fade-in">
+    <div class="cert-card">
+      <div class="cert-icon">☁️</div>
+      <div class="cert-info">
+        <h4>Machine Learning Foundation</h4>
+        <p>AWS Labs · AWS Educate</p>
+        <span class="cert-year">2026</span>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🌐</div>
+      <div class="cert-info">
+        <h4>Innovating with Google Cloud AI</h4>
+        <p>Google Cloud × Simplilearn SkillUp · ID: 10018381</p>
+        <span class="cert-year">March 2026</span>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">✨</div>
+      <div class="cert-info">
+        <h4>Generative AI for Beginners</h4>
+        <p>Simplilearn SkillUp · ID: 10018223</p>
+        <span class="cert-year">March 2026</span>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🔒</div>
+      <div class="cert-info">
+        <h4>Cybersecurity for Businesses</h4>
+        <p>CodeRed Continuous Learning</p>
+        <span class="cert-year">2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HACKATHON -->
+<section id="hackathon">
+  <div class="fade-in">
+    <div class="section-label">// competitions</div>
+    <h2 class="section-title">Hackathons</h2>
+  </div>
+  <div class="hackathon-card fade-in">
+    <div class="hack-badge">🏆<br/>Final<br/>Round</div>
+    <div class="hack-info">
+      <h3>Technothon Aayam 2026</h3>
+      <p class="hack-org">National Institute of Technology (NIT) Agartala · 2026</p>
+      <p>Qualified and competed in the Final Round of Technothon Aayam 2026, representing ICFAI University Jaipur as <strong>Team GreyScale</strong>. Worked on the <strong>Solar Energy Innovation Project</strong> — designing and prototyping AI-assisted solar energy solutions under competitive, time-constrained conditions at a prestigious national-level inter-college competition.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="fade-in">
+    <div class="section-label">// academics</div>
+    <h2 class="section-title">Education</h2>
+    <p class="section-sub">Strong academic record from school to university.</p>
+  </div>
+  <div class="edu-timeline fade-in">
+    <div class="edu-card">
+      <div class="edu-year">2025 – 2029</div>
+      <div class="edu-info">
+        <h3>B.Tech – Computer Science Engineering (AI & ML)</h3>
+        <p class="institute">The ICFAI University · Jaipur, Rajasthan</p>
+        <span class="edu-gpa">⭐ Sem 1: 9.42 &nbsp;|&nbsp; Sem 2: 9.26 &nbsp;|&nbsp; CGPA: 9.34 / 10</span>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2025</div>
+      <div class="edu-info">
+        <h3>Senior Secondary – Class XII (RBSE)</h3>
+        <p class="institute">Vidhya Sagar Academy · Bassi, Rajasthan</p>
+        <span class="edu-gpa">📊 79.9%</span>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2023</div>
+      <div class="edu-info">
+        <h3>Secondary – Class X (CBSE)</h3>
+        <p class="institute">Pearl Central Academy · Rajasthan</p>
+        <span class="edu-gpa">📊 86.2%</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="fade-in">
+    <div class="section-label">// currently learning</div>
+    <h2 class="section-title">Learning Roadmap</h2>
+    <p class="section-sub">Following a structured 9–14 month AI/ML engineer roadmap (15–20 hrs/week), targeting production-level AI roles.</p>
+  </div>
+  <div class="roadmap-grid fade-in">
+    <div class="roadmap-card">
+      <span class="roadmap-phase">Phase 1 — In Progress</span>
+      <h4>Mathematical Foundations</h4>
+      <ul class="roadmap-items">
+        <li>Linear Algebra & Multivariable Calculus</li>
+        <li>Probability & Statistics</li>
+        <li>Optimization (Gradient Descent, Adam)</li>
+      </ul>
+    </div>
+    <div class="roadmap-card">
+      <span class="roadmap-phase">Phase 1 — In Progress</span>
+      <h4>Advanced Python</h4>
+      <ul class="roadmap-items">
+        <li>Generators, decorators, type hints</li>
+        <li>NumPy & Pandas vectorized ops</li>
+        <li>Git workflow & dev practices</li>
+      </ul>
+    </div>
+    <div class="roadmap-card">
+      <span class="roadmap-phase">Phase 2 — Upcoming</span>
+      <h4>Classical Machine Learning</h4>
+      <ul class="roadmap-items">
+        <li>Regression, Decision Trees, Random Forests</li>
+        <li>k-Means, PCA, cross-validation</li>
+        <li>Bias-variance tradeoff & regularization</li>
+      </ul>
+    </div>
+    <div class="roadmap-card">
+      <span class="roadmap-phase">Phase 2 — Upcoming</span>
+      <h4>ML Engineering</h4>
+      <ul class="roadmap-items">
+        <li>Feature engineering & data pipelines</li>
+        <li>Evaluation: ROC-AUC, F1, Precision/Recall</li>
+        <li>End-to-end ML on real datasets</li>
+      </ul>
+    </div>
+    <div class="roadmap-card">
+      <span class="roadmap-phase">Ongoing</span>
+      <h4>DSA & Interview Prep</h4>
+      <ul class="roadmap-items">
+        <li>Blind 75 problem set on LeetCode</li>
+        <li>Arrays, Hash Maps, Trees, Graphs</li>
+        <li>Dynamic Programming</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner fade-in">
+    <div class="section-label">// say hello</div>
+    <h2 class="section-title">Let's Connect</h2>
+    <p class="section-sub">Open to internships, research collaborations, and AI/ML projects. Based in Jaipur, India.</p>
+    <div class="contact-cards">
+      <a href="mailto:govind.official727@gmail.com" class="contact-card">
+        <span class="contact-card-icon">📧</span>
+        <span class="contact-card-label">Email</span>
+        <span class="contact-card-val">govind.official727</span>
+      </a>
+      <a href="https://www.linkedin.com/in/govind-sharma-1154a7332" class="contact-card">
+        <span class="contact-card-icon">💼</span>
+        <span class="contact-card-label">LinkedIn</span>
+        <span class="contact-card-val">govindsharma</span>
+      </a>
+      <a href="tel:+919257121185" class="contact-card">
+        <span class="contact-card-icon">📞</span>
+        <span class="contact-card-label">Phone</span>
+        <span class="contact-card-val">+91 92571 21185</span>
+      </a>
+      <a href="#" class="contact-card">
+        <span class="contact-card-icon">📍</span>
+        <span class="contact-card-label">Location</span>
+        <span class="contact-card-val">Jaipur, Rajasthan</span>
+      </a>
+    </div>
+    <a href="mailto:govind.official727@gmail.com" class="btn-primary" style="font-size:0.97rem; padding:0.95rem 2.4rem;">✉️ Send Me a Message</a>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & built by <span>Govind Sharma</span> · AI & ML Engineer · Jaipur, India · 2026</p>
+</footer>
+
+<script>
+  function toggleCGPA() {
+    const panel = document.getElementById('cgpa-panel');
+    const arrow = document.getElementById('cgpa-arrow');
+    const btn = document.getElementById('cgpa-btn');
+    const open = panel.style.display === 'block';
+    panel.style.display = open ? 'none' : 'block';
+    arrow.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
+    btn.style.borderColor = open ? 'var(--border)' : 'var(--accent)';
+    btn.style.color = open ? 'var(--heading)' : 'var(--accent)';
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if(window.scrollY >= s.offsetTop - 120) current = s.id; });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+    });
+  });
+</script>
+</body>
+</html>
